@@ -1,1 +1,3 @@
-export * from './hooks/BrowserStorage';
+import useBrowserStorage from './hooks/BrowserStorage';
+
+export { useBrowserStorage };

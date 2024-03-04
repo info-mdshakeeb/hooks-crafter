@@ -1,7 +1,8 @@
 import terser from "@rollup/plugin-terser";
 
-const prod = !process.env.NODE_ENV === "development";
-console.log('dev', prod);
+
+const devMode = (process.env.NODE_ENV === 'development');
+console.log(`${devMode ? 'development' : 'production'} mode bundle`);
 
 
 export default [
@@ -11,15 +12,16 @@ export default [
       file: "dist/index.js",
       format: "es",
       name: "hooks-crafter",
-      sourcemap: prod,
+      sourcemap: devMode ? 'inline' : false,
       Plugins: [terser({
         ecma: 2020,
         mangle: { toplevel: true },
         compress: {
           module: true,
           toplevel: true,
-          drop_console: prod,
-          drop_debugger: prod,
+          unsafe_arrows: true,
+          drop_console: !devMode,
+          drop_debugger: !devMode,
         },
         output: { quote_style: 1, }
       })]
