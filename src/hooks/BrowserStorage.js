@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState } from 'react';
+import PropTypes from 'prop-types';
 
 /**
  * @param {Object} options - Options for the hook
@@ -9,12 +10,12 @@ import { useState } from "react";
  */
 
 const useBrowserStorage = ({ storage = "local", key, initial }) => {
-  const storageApi = storage === "local" ? localStorage : sessionStorage;
-  const solve = typeof window !== 'undefined' && storageApi
+
+  const solve = typeof window !== 'undefined';
 
   const [value, setValue] = useState(() => {
     try {
-      const item = solve && storageApi.getItem(key);
+      const item = solve && storage === "local" ? localStorage.getItem(key) : solve && storage === "session" ? sessionStorage.getItem(key) : null;
       return item ? JSON.parse(item) : initial;
     } catch (error) {
       console.error(error);
@@ -22,15 +23,24 @@ const useBrowserStorage = ({ storage = "local", key, initial }) => {
     }
   });
   const set = (val) => {
-    const newValue = { ...value, ...val }
-    solve && storageApi.setItem(key, JSON.stringify(newValue));
-    setValue(newValue);
-  }
-  const clear = () => {
-    solve && storageApi.removeItem(key);
-    setValue(initial);
-  }
-  return [value, set, clear];
-}
+    const newValue = { ...value, ...val };
+    const valueString = JSON.stringify(newValue);
 
-export default useBrowserStorage;
+
+    solve && storage === "local" ? localStorage.setItem(key, valueString) : sessionStorage.setItem(key, valueString);
+    setValue(newValue);
+  };
+  const clear = () => {
+    solve && storage === "local" ? localStorage.removeItem(key) : sessionStorage.removeItem(key);
+    setValue(initial);
+  };
+  return [value, set, clear];
+};
+
+useBrowserStorage.propTypes = {
+  storage: PropTypes.oneOf(['local', 'session']),
+  key: PropTypes.string.isRequired,
+  initial: PropTypes.any
+};
+
+export { useBrowserStorage };

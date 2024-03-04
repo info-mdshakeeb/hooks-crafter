@@ -24,5 +24,8 @@
   "devDependencies": {
     "@rollup/plugin-terser": "^0.4.4",
     "rollup": "^4.12.0"
+  },
+  "dependencies": {
+    "prop-types": "^15.8.1"
   }
 }
