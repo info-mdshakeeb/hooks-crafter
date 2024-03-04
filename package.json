@@ -1,0 +1,28 @@
+{
+  "name": "hooks-crafter",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "A collection of reusable React components and hooks.",
+  "main": "dist/index.js",
+  "scripts": {
+    "build:dev": "rollup -c --environment NODE_ENV:development",
+    "build": "rollup -c --environment NODE_ENV:production",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "react",
+    "components",
+    "hooks",
+    "reusable"
+  ],
+  "author": "Shakeeb",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/info-mdshakeeb/hooks-crafter"
+  },
+  "devDependencies": {
+    "@rollup/plugin-terser": "^0.4.4",
+    "rollup": "^4.12.0"
+  }
+}
