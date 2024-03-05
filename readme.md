@@ -61,5 +61,6 @@ const MyComponent = () => {
 export default MyComponent;
 ```
 
-License
-ISC
+## License
+
+MIT
