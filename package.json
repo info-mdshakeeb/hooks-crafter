@@ -1,6 +1,6 @@
 {
   "name": "hooks-crafter",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "type": "module",
   "description": "A collection of reusable React components and hooks.",
   "main": "dist/index.js",
