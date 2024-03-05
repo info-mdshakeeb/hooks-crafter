@@ -63,7 +63,3 @@ export default MyComponent;
 
 License
 ISC
-
-```
-
-```
